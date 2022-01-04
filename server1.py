@@ -5,10 +5,10 @@ from mprpc import RPCServer, RPCClient
 
 class BorrowServer(RPCServer):
 
-    def borrow(self, code_mely, n_account):
-        Bankـreturnـcheck = self.server2(self, code_mely, n_account)
-        Deferred_installment = self.server3(self, code_mely, n_account) # gest_mavaghe
-        return Bankـreturnـcheck, Deferred_installment
+    def server1(self, code_mely, n_account):
+        s2 = self.server2(code_mely, n_account)
+        s3 = self.server3(code_mely, n_account)
+        return bool(s2 == s3)
 
     def server2(self, code_mely, n_account):
         client = RPCClient('127.0.0.1', 6001)
@@ -23,6 +23,6 @@ class BorrowServer(RPCServer):
         return result
 
 
-
 server = StreamServer(('127.0.0.1', 6000), BorrowServer())
+print('server1 is ready')
 server.serve_forever()
